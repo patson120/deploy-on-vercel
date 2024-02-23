@@ -12,6 +12,12 @@ const Home = () => {
     const data = await fetch(`${CONSTANTS.BASE_URL}/hello`)
     const response = await data.json();
     setMessage(response.message)
+
+    const p = await fetch(`${CONSTANTS.BASE_URL}/posts`)
+    const posts = await p.json();
+
+    console.log({users: posts});
+    
     
   }
 
@@ -23,7 +29,7 @@ const Home = () => {
   return (
     <main>
       <h1>{message}</h1>
-      <h3>Welcome !</h3>
+      <h3>Welcome to Behati!</h3>
     </main>
   );
 }

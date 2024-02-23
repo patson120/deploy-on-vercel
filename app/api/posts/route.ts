@@ -27,8 +27,8 @@ export async function GET(request: Request){
   return NextResponse.json({ message: "List of users", users }, { status: STATUS.OK });
 }
 
-// Handles POST requests to /api/users
-export async function POST(request: Request) {
-  // ...
-  return NextResponse.json({ message: "Hello World" }, { status: STATUS.BAD_REQUEST });
-}
+// // Handles POST requests to /api/users
+// export async function POST(request: Request) {
+//   // ...
+//   return NextResponse.json({ message: "Hello World" }, { status: STATUS.BAD_REQUEST });
+// }
