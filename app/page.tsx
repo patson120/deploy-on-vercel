@@ -13,7 +13,7 @@ const Home = () => {
     const response = await data.json();
     setMessage(response.message)
 
-    const p = await fetch(`${CONSTANTS.BASE_URL}/posts`)
+    const p = await fetch(`${CONSTANTS.BASE_URL}/users`)
     const posts = await p.json();
 
     console.log({users: posts});
