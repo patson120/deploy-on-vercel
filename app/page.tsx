@@ -15,7 +15,7 @@ const Home = () => {
 
   const getData = async () => {
     
-    const data = await fetch(`${CONSTANTS.BASE_URL}/users`)
+    const data = await fetch(`${CONSTANTS.BASE_URL}/persons`)
     const response = await data.json();
     setUsers(response.users)
 
