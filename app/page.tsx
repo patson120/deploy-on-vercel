@@ -11,10 +11,7 @@ const Home = () => {
   const getData = async () => {
     const data = await fetch(`${CONSTANTS.BASE_URL}/hello`)
     const response = await data.json();
-
     setMessage(response.message)
-
-    console.log({ response});
     
   }
 
@@ -25,7 +22,8 @@ const Home = () => {
 
   return (
     <main>
-      <h1>Home {message}</h1>
+      <h1>{message}</h1>
+      <h3>Welcome !</h3>
     </main>
   );
 }
