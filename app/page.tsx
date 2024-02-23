@@ -1,37 +1,58 @@
 'use client'
 
-
 import CONSTANTS from "@/utils/constants"
-import { useEffect, useState } from "react";
+import { collection, getDocs, query } from "firebase/firestore"
+import { useLayoutEffect, useState } from "react"
+
+import { database } from "@/config/firebase"
+
+
 
 const Home = () => {
 
-  const [message, setMessage]  = useState('')
+  const [users, setUsers] = useState([])
+  const [cars, setCars] = useState<any>([])
 
   const getData = async () => {
-    const data = await fetch(`${CONSTANTS.BASE_URL}/hello`)
+    
+    const data = await fetch(`${CONSTANTS.BASE_URL}/users`)
     const response = await data.json();
-    setMessage(response.message)
+    setUsers(response.users)
 
-    const p = await fetch(`${CONSTANTS.BASE_URL}/users`)
-    const posts = await p.json();
+    const carsQuery = query(collection(database, "VEHICLE"))
+    const querySnapshot = await getDocs(carsQuery)
 
-    console.log({users: posts});
-    
-    
+    setCars([])
+    querySnapshot.forEach((doc) => {
+      setCars((prev: any) => [...prev, doc.data()])
+    })
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     getData();
   }, [])
 
-
   return (
-    <main>
-      <h1>{message}</h1>
-      <h3>Welcome to Behati!</h3>
-    </main>
-  );
+    <div>
+      <h1 className="text-3xl font-bold">Bienvenu sur Behati</h1>
+
+      <h3 className="text-xl font-satoshi font-bold my-4">Users</h3>
+      <ul>
+        {
+          users.map((user: any) => (
+            <li key={user.id}>{user.username}</li>
+          ))
+        }
+
+        <h3 className="text-xl font-satoshi font-bold my-4">Cars</h3>
+        {
+          cars.map((car: any) => (
+            <li key={car._id}>{car.model.libelle} * {car._id}</li>
+          ))
+        }
+      </ul>
+    </div>
+  )
 }
 
 export default Home
