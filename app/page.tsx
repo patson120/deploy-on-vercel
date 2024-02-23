@@ -1,5 +1,7 @@
 'use client'
 
+
+import CONSTANTS from "@/utils/constants"
 import { useEffect, useState } from "react";
 
 const Home = () => {
@@ -7,7 +9,7 @@ const Home = () => {
   const [message, setMessage]  = useState('')
 
   const getData = async () => {
-    const data = await fetch(`https://deploy-on-vercel-one.vercel.app/api/hello`)
+    const data = await fetch(`${CONSTANTS.BASE_URL}/hello`)
     const response = await data.json();
 
     setMessage(response.message)
